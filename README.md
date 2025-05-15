@@ -105,17 +105,7 @@
 
 ---
 
-## 🐍 Snake Eating My Contribution
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/KaranVenkatesan/KaranVenkatesan/github-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/KaranVenkatesan/KaranVenkatesan/github-snake.svg">
-    <img src="https://raw.githubusercontent.com/KaranVenkatesan/KaranVenkatesan/github-snake.svg" alt="Snake animation">
-  </picture>
-</p>
-
----
 
 
  
