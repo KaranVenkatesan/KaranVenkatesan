@@ -1,21 +1,38 @@
 name: Generate Snake
+
 on:
   schedule:
-    - cron: "0 0 * * *"  # Updates daily
-  workflow_dispatch:     # Lets you manually run it
+    - cron: "0 */6 * * *"  # Runs every 6 hours
+  workflow_dispatch:       # Allows manual triggering
+
 jobs:
-  generate:
+  build:
     runs-on: ubuntu-latest
+    
     steps:
+      - uses: actions/checkout@v2
+
+      # Generate both light and dark snakes
       - uses: Platane/snk@master
+        id: snake-light
         with:
-          github_user_name: KaranVenkatesan  # Your username
-          svg_out_path: github-snake.svg
-      - run: |
-          mv github-snake.svg github-snake-dark.svg
-          sed -i 's/#333/#0D1117/g' github-snake-dark.svg  # Dark mode colors
-      - uses: actions/upload-pages-artifact@v1
+          github_user_name: KaranVenkatesan
+          svg_out_path: dist/github-snake.svg
+          
+      - uses: Platane/snk@master
+        id: snake-dark
         with:
-          path: |
-            github-snake.svg
-            github-snake-dark.svg
+          github_user_name: KaranVenkatesan
+          svg_out_path: dist/github-snake-dark.svg
+          color_snake: '#0D1117'
+          color_dots: '#58A6FF'
+          color_eyes: '#58A6FF'
+
+      # Push to your main branch
+      - name: Commit and push
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add dist/
+          git commit -m "Update snake animation [skip ci]"
+          git push
