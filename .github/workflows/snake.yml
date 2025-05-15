@@ -1,0 +1,21 @@
+name: Generate Snake
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Updates daily
+  workflow_dispatch:     # Lets you manually run it
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Platane/snk@master
+        with:
+          github_user_name: KaranVenkatesan  # Your username
+          svg_out_path: github-snake.svg
+      - run: |
+          mv github-snake.svg github-snake-dark.svg
+          sed -i 's/#333/#0D1117/g' github-snake-dark.svg  # Dark mode colors
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: |
+            github-snake.svg
+            github-snake-dark.svg
