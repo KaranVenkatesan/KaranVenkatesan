@@ -3,25 +3,25 @@ name: Generate Snake
 on:
   schedule:
     - cron: "0 */6 * * *"  # Every 6 hours
-  workflow_dispatch:       # Allow manual runs
+  workflow_dispatch:       # Allow manual trigger from GitHub UI
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     permissions:
-      contents: write  # Required to allow pushing to the repo
+      contents: write  # Needed to push changes
 
     steps:
-      # Checkout the output branch (or create it if it doesn't exist)
+      # Step 1: Checkout the `output` branch
       - name: Checkout output branch
         uses: actions/checkout@v3
         with:
-          ref: output  # 👈 checkout the `output` branch
-          persist-credentials: false  # avoids issues with PAT vs token
+          ref: output  # 🔁 Checkout the `output` branch
 
-      # Generate the snake animations
-      - uses: Platane/snk@master
+      # Step 2: Generate snake animations
+      - name: Generate GitHub Snake SVG
+        uses: Platane/snk@master
         with:
           github_user_name: KaranVenkatesan
           outputs: |
@@ -31,13 +31,13 @@ jobs:
           color_dots: '#58A6FF'
           color_eyes: '#58A6FF'
 
-      # Push the generated SVGs to the output branch
-      - name: Push snake animation to output branch
+      # Step 3: Commit and push to the output branch
+      - name: Commit and Push changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add dist/
           git commit -m "Update snake animation [skip ci]" || echo "No changes to commit"
-          git push origin output  # 👈 ensure this pushes to output branch
+          git push origin output
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
