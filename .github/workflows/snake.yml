@@ -10,32 +10,34 @@ jobs:
     runs-on: ubuntu-latest
     
     permissions:
-      contents: write  # ✅ Required to push changes
+      contents: write  # Required to allow pushing to the repo
 
     steps:
-      - uses: actions/checkout@v3
+      # Checkout the output branch (or create it if it doesn't exist)
+      - name: Checkout output branch
+        uses: actions/checkout@v3
+        with:
+          ref: output  # 👈 checkout the `output` branch
+          persist-credentials: false  # avoids issues with PAT vs token
 
+      # Generate the snake animations
       - uses: Platane/snk@master
-        id: snake-light
         with:
           github_user_name: KaranVenkatesan
-          svg_out_path: dist/github-snake.svg
-
-      - uses: Platane/snk@master
-        id: snake-dark
-        with:
-          github_user_name: KaranVenkatesan
-          svg_out_path: dist/github-snake-dark.svg
+          outputs: |
+            dist/github-snake.svg
+            dist/github-snake-dark.svg
           color_snake: '#0D1117'
           color_dots: '#58A6FF'
           color_eyes: '#58A6FF'
 
-      - name: Commit and push
+      # Push the generated SVGs to the output branch
+      - name: Push snake animation to output branch
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add dist/
           git commit -m "Update snake animation [skip ci]" || echo "No changes to commit"
-          git push
+          git push origin output  # 👈 ensure this pushes to output branch
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # ✅ Uses GitHub-provided token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
