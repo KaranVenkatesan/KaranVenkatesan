@@ -1,43 +1,43 @@
-name: Generate Snake
+# name: Generate Snake
 
-on:
-  schedule:
-    - cron: "0 */6 * * *"  # Every 6 hours
-  workflow_dispatch:       # Allow manual trigger from GitHub UI
+# on:
+#   schedule:
+#     - cron: "0 */6 * * *"  # Every 6 hours
+#   workflow_dispatch:       # Allow manual trigger from GitHub UI
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
     
-    permissions:
-      contents: write  # Needed to push changes
+#     permissions:
+#       contents: write  # Needed to push changes
 
-    steps:
-      # Step 1: Checkout the `output` branch
-      - name: Checkout output branch
-        uses: actions/checkout@v3
-        with:
-          ref: output  # 🔁 Checkout the `output` branch
+#     steps:
+#       # Step 1: Checkout the `output` branch
+#       - name: Checkout output branch
+#         uses: actions/checkout@v3
+#         with:
+#           ref: output  # 🔁 Checkout the `output` branch
 
-      # Step 2: Generate snake animations
-      - name: Generate GitHub Snake SVG
-        uses: Platane/snk@master
-        with:
-          github_user_name: KaranVenkatesan
-          outputs: |
-            dist/github-snake.svg
-            dist/github-snake-dark.svg
-          color_snake: '#0D1117'
-          color_dots: '#58A6FF'
-          color_eyes: '#58A6FF'
+#       # Step 2: Generate snake animations
+#       - name: Generate GitHub Snake SVG
+#         uses: Platane/snk@master
+#         with:
+#           github_user_name: KaranVenkatesan
+#           outputs: |
+#             dist/github-snake.svg
+#             dist/github-snake-dark.svg
+#           color_snake: '#0D1117'
+#           color_dots: '#58A6FF'
+#           color_eyes: '#58A6FF'
 
-      # Step 3: Commit and push to the output branch
-      - name: Commit and Push changes
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add dist/
-          git commit -m "Update snake animation [skip ci]" || echo "No changes to commit"
-          git push origin output
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       # Step 3: Commit and push to the output branch
+#       - name: Commit and Push changes
+#         run: |
+#           git config --global user.name "GitHub Actions"
+#           git config --global user.email "actions@github.com"
+#           git add dist/
+#           git commit -m "Update snake animation [skip ci]" || echo "No changes to commit"
+#           git push origin output
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
