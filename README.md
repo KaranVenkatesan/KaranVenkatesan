@@ -3,9 +3,7 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=25&pause=1000&center=true&vCenter=true&width=500&lines=Hi+I'm+Karan!;Full-Stack+Developer;Creative+Tech+Educator;Building+Cool+Things+🚀" alt="Typing Animation" />
 </h1>
 
-<p align="center">
-  <img src="https://avatars.githubusercontent.com/u/12345678?v=4" width="300" />
-</p>
+
 
 <h3 align="center">
   <strong>🚀 Aspiring MERN Stack Developer | Crafting UI-rich Web Apps with React.js ⚛️ & Node.js ⚙️</strong>
