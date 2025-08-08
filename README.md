@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=25&pause=1000&center=true&vCenter=true&width=500&lines=Hi+I'm+Karan!;Full-Stack+Developer;Creative+Tech+Educator;Building+Cool+Things+🚀" alt="Typing Animation" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=25&pause=1000&center=true&vCenter=true&width=500&lines=Hi+I'm+Karan!;Full-Stack+Developer;Building+Cool+Things+🚀" alt="Typing Animation" />
 </h1>
 
 
